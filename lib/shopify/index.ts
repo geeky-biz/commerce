@@ -68,13 +68,6 @@ const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
 // Check if we should use Shopify API or mock data (default to mock data)
 const useShopifyAPI = process.env.USE_SHOPIFY_API === 'true';
 
-// Debug: log which mode we're using
-if (useShopifyAPI) {
-  console.log('[Shopify] Using REAL Shopify API (USE_SHOPIFY_API=true)');
-} else {
-  console.log('[Shopify] Using MOCK DATA (USE_SHOPIFY_API not set or false)');
-}
-
 // In-memory cart storage for mock data
 const mockCarts = new Map<string, ShopifyCart>();
 
@@ -95,13 +88,8 @@ type MockData = {
 function getMockData(): MockData {
   try {
     const data = mockDataJson as MockData;
-    // Debug: verify data is loaded
-    if (data.products.length === 0) {
-      console.warn('Mock data loaded but products array is empty');
-    }
     return data;
   } catch (error) {
-    console.error('Error loading mock data:', error);
     return {
       products: [],
       collections: [],
@@ -185,13 +173,6 @@ async function getMockResponse<T>({
   variables?: any;
 }): Promise<{ status: number; body: T }> {
   const data = getMockData();
-  
-  // Debug: log query type for troubleshooting
-  const queryPreview = query.substring(0, 150).replace(/\s+/g, ' ');
-  console.log(`[Mock] Received query: ${queryPreview}`);
-  if (query.includes('getCollectionProducts') || (query.includes('collection') && query.includes('products'))) {
-    console.log(`[Mock] Handling collection products query for handle: ${variables?.handle}, query preview: ${queryPreview}`);
-  }
 
   // Identify query type by checking for unique query strings
   // IMPORTANT: Check getCollectionProducts FIRST before getProducts, since getCollectionProducts
@@ -209,17 +190,7 @@ async function getMockResponse<T>({
     let products = data.products.filter((p) => productHandles.includes(p.handle));
     products = sortProducts(products, variables?.sortKey, variables?.reverse);
     
-    // Debug logging
-    console.log(`[Mock] Collection "${handle}": found ${productHandles.length} product handles, matched ${products.length} products`);
-    console.log(`[Mock] Product handles in collection:`, productHandles);
-    console.log(`[Mock] Available product handles in data:`, data.products.map(p => p.handle));
-    
-    if (handle && productHandles.length === 0) {
-      console.log(`[Mock] Collection "${handle}" has no products mapped. Available collections:`, Object.keys(data.collectionProducts));
-    }
-    
-    // Always return collection object, even if empty, to match Shopify API behavior
-    const response = {
+    return {
       status: 200,
       body: {
         data: {
@@ -229,9 +200,6 @@ async function getMockResponse<T>({
         }
       } as T
     };
-    
-    console.log(`[Mock] Returning response with collection:`, JSON.stringify(response.body).substring(0, 200));
-    return response;
   }
 
   // Check for getProductRecommendations FIRST (more specific) before getProduct
@@ -242,8 +210,6 @@ async function getMockResponse<T>({
     const recommendations = data.products
       .filter((p) => p.id !== productId)
       .slice(0, 3);
-    
-    console.log(`[Mock] Product recommendations for productId "${productId}": found ${recommendations.length} recommendations`);
     
     return {
       status: 200,
@@ -276,7 +242,6 @@ async function getMockResponse<T>({
       (query.includes('product(') && !query.includes('products(') && !query.includes('Recommendations'))) {
     const handle = variables?.handle as string;
     const product = data.products.find((p) => p.handle === handle);
-    console.log(`[Mock] getProduct for handle "${handle}": ${product ? 'found' : 'not found'}`);
     return {
       status: 200,
       body: {
@@ -581,15 +546,12 @@ async function getMockResponse<T>({
     };
   }
 
-  // Default response for unknown queries - log for debugging
   // Final fallback: Check if it's a collection products query that didn't match above
   if (query.includes('collection') && query.includes('products') && !query.includes('collections(')) {
     const handle = variables?.handle as string;
-    console.log(`[Mock] Fallback: Handling collection products query for handle: ${handle}`);
     const productHandles = data.collectionProducts[handle] || [];
     let products = data.products.filter((p) => productHandles.includes(p.handle));
     products = sortProducts(products, variables?.sortKey, variables?.reverse);
-    console.log(`[Mock] Found ${products.length} products for collection "${handle}"`);
     return {
       status: 200,
       body: {
@@ -605,7 +567,6 @@ async function getMockResponse<T>({
   // Final fallback: Check if it's a product recommendations query
   if (query.includes('productRecommendations') || (query.includes('product') && query.includes('Recommendations'))) {
     const productId = variables?.productId as string;
-    console.log(`[Mock] Fallback: Handling product recommendations query for productId: ${productId}`);
     const recommendations = data.products
       .filter((p) => p.id !== productId)
       .slice(0, 3);
@@ -619,7 +580,6 @@ async function getMockResponse<T>({
     };
   }
   
-  console.warn('[Mock] Unknown query type, returning empty data. Query preview:', query.substring(0, 200).replace(/\s+/g, ' '));
   return {
     status: 200,
     body: {
@@ -890,7 +850,6 @@ export async function getCollectionProducts({
 
 
   if (!res.body.data?.collection) {
-    console.log(`No collection found for \`${collection}\``);
     return [];
   }
 
