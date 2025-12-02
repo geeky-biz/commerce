@@ -188,6 +188,7 @@ async function getMockResponse<T>({
   
   // Debug: log query type for troubleshooting
   const queryPreview = query.substring(0, 150).replace(/\s+/g, ' ');
+  console.log(`[Mock] Received query: ${queryPreview}`);
   if (query.includes('getCollectionProducts') || (query.includes('collection') && query.includes('products'))) {
     console.log(`[Mock] Handling collection products query for handle: ${variables?.handle}, query preview: ${queryPreview}`);
   }
@@ -254,23 +255,9 @@ async function getMockResponse<T>({
     };
   }
 
-  // Check for getProduct (single product) - must come after getProductRecommendations
-  if (query.includes('query getProduct') || (query.includes('product(') && !query.includes('products(') && !query.includes('Recommendations'))) {
-    const handle = variables?.handle as string;
-    const product = data.products.find((p) => p.handle === handle);
-    console.log(`[Mock] getProduct for handle "${handle}": ${product ? 'found' : 'not found'}`);
-    return {
-      status: 200,
-      body: {
-        data: {
-          product: product || null
-        }
-      } as T
-    };
-  }
-
-  // Check for getProducts - must exclude collection products queries
-  if ((query.includes('query getProducts') || query.includes('products(')) && !query.includes('collection(')) {
+  // Check for getProducts BEFORE getProduct - must come before getProduct since "getProducts" contains "getProduct"
+  // and must exclude collection products queries
+  if (query.includes('query getProducts') || (query.includes('products(') && !query.includes('collection('))) {
     let products = [...data.products];
     products = filterProductsByQuery(products, variables?.query);
     products = sortProducts(products, variables?.sortKey, variables?.reverse);
@@ -279,6 +266,22 @@ async function getMockResponse<T>({
       body: {
         data: {
           products: toConnection(products)
+        }
+      } as T
+    };
+  }
+
+  // Check for getProduct (single product) - must come after getProducts to avoid matching "getProducts"
+  if ((query.includes('query getProduct') && !query.includes('query getProducts') && !query.includes('query getProductRecommendations')) || 
+      (query.includes('product(') && !query.includes('products(') && !query.includes('Recommendations'))) {
+    const handle = variables?.handle as string;
+    const product = data.products.find((p) => p.handle === handle);
+    console.log(`[Mock] getProduct for handle "${handle}": ${product ? 'found' : 'not found'}`);
+    return {
+      status: 200,
+      body: {
+        data: {
+          product: product || null
         }
       } as T
     };
