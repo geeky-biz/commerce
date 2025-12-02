@@ -1,0 +1,342 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/1",
+      "handle": "acme-drawstring-bag",
+      "availableForSale": true,
+      "title": "Acme Drawstring Bag",
+      "description": "A high-quality drawstring bag perfect for everyday use.",
+      "descriptionHtml": "<p>A high-quality drawstring bag perfect for everyday use.</p>",
+      "options": [
+        {
+          "id": "gid://shopify/ProductOption/1",
+          "name": "Color",
+          "values": ["Black", "White", "Blue"]
+        }
+      ],
+      "priceRange": {
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        },
+        "minVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/1",
+              "title": "Black",
+              "availableForSale": true,
+              "selectedOptions": [
+                {
+                  "name": "Color",
+                  "value": "Black"
+                }
+              ],
+              "price": {
+                "amount": "29.99",
+                "currencyCode": "USD"
+              }
+            }
+          },
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/2",
+              "title": "White",
+              "availableForSale": true,
+              "selectedOptions": [
+                {
+                  "name": "Color",
+                  "value": "White"
+                }
+              ],
+              "price": {
+                "amount": "29.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      },
+      "featuredImage": {
+        "url": "https://images.unsplash.com/photo-1542957057-debadce4ce81",
+        "altText": "Acme Drawstring Bag",
+        "width": 1024,
+        "height": 1024
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1542957057-debadce4ce81",
+              "altText": "Acme Drawstring Bag",
+              "width": 1024,
+              "height": 1024
+            }
+          }
+        ]
+      },
+      "seo": {
+        "title": "Acme Drawstring Bag",
+        "description": "A high-quality drawstring bag perfect for everyday use."
+      },
+      "tags": ["bag", "accessories"],
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "gid://shopify/Product/2",
+      "handle": "acme-cup",
+      "availableForSale": true,
+      "title": "Acme Cup",
+      "description": "A durable ceramic cup for your morning coffee.",
+      "descriptionHtml": "<p>A durable ceramic cup for your morning coffee.</p>",
+      "options": [
+        {
+          "id": "gid://shopify/ProductOption/2",
+          "name": "Size",
+          "values": ["Small", "Large"]
+        }
+      ],
+      "priceRange": {
+        "maxVariantPrice": {
+          "amount": "19.99",
+          "currencyCode": "USD"
+        },
+        "minVariantPrice": {
+          "amount": "15.99",
+          "currencyCode": "USD"
+        }
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/3",
+              "title": "Small",
+              "availableForSale": true,
+              "selectedOptions": [
+                {
+                  "name": "Size",
+                  "value": "Small"
+                }
+              ],
+              "price": {
+                "amount": "15.99",
+                "currencyCode": "USD"
+              }
+            }
+          },
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/4",
+              "title": "Large",
+              "availableForSale": true,
+              "selectedOptions": [
+                {
+                  "name": "Size",
+                  "value": "Large"
+                }
+              ],
+              "price": {
+                "amount": "19.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      },
+      "featuredImage": {
+        "url": "https://images.unsplash.com/photo-1550329869-0c8c34e3fc42",
+        "altText": "Acme Cup",
+        "width": 1024,
+        "height": 1024
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1550329869-0c8c34e3fc42",
+              "altText": "Acme Cup",
+              "width": 1024,
+              "height": 1024
+            }
+          }
+        ]
+      },
+      "seo": {
+        "title": "Acme Cup",
+        "description": "A durable ceramic cup for your morning coffee."
+      },
+      "tags": ["cup", "drinkware"],
+      "updatedAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "gid://shopify/Product/3",
+      "handle": "acme-mug",
+      "availableForSale": true,
+      "title": "Acme Mug",
+      "description": "A classic coffee mug with a comfortable handle.",
+      "descriptionHtml": "<p>A classic coffee mug with a comfortable handle.</p>",
+      "options": [
+        {
+          "id": "gid://shopify/ProductOption/3",
+          "name": "Color",
+          "values": ["Red", "Blue", "Green"]
+        }
+      ],
+      "priceRange": {
+        "maxVariantPrice": {
+          "amount": "24.99",
+          "currencyCode": "USD"
+        },
+        "minVariantPrice": {
+          "amount": "24.99",
+          "currencyCode": "USD"
+        }
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/5",
+              "title": "Red",
+              "availableForSale": true,
+              "selectedOptions": [
+                {
+                  "name": "Color",
+                  "value": "Red"
+                }
+              ],
+              "price": {
+                "amount": "24.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      },
+      "featuredImage": {
+        "url": "https://images.unsplash.com/photo-1566892972120-e05b15eb16aa",
+        "altText": "Acme Mug",
+        "width": 1024,
+        "height": 1024
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1566892972120-e05b15eb16aa",
+              "altText": "Acme Mug",
+              "width": 1024,
+              "height": 1024
+            }
+          }
+        ]
+      },
+      "seo": {
+        "title": "Acme Mug",
+        "description": "A classic coffee mug with a comfortable handle."
+      },
+      "tags": ["mug", "drinkware"],
+      "updatedAt": "2024-01-03T00:00:00Z"
+    }
+  ],
+  "collections": [
+    {
+      "handle": "all",
+      "title": "All Products",
+      "description": "All available products",
+      "seo": {
+        "title": "All Products",
+        "description": "Browse all available products"
+      },
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "handle": "drinkware",
+      "title": "Drinkware",
+      "description": "Cups, mugs, and drinkware",
+      "seo": {
+        "title": "Drinkware Collection",
+        "description": "Browse our drinkware collection"
+      },
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "handle": "accessories",
+      "title": "Accessories",
+      "description": "Bags and accessories",
+      "seo": {
+        "title": "Accessories Collection",
+        "description": "Browse our accessories collection"
+      },
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "pages": [
+    {
+      "id": "gid://shopify/OnlineStorePage/1",
+      "title": "About Us",
+      "handle": "about",
+      "body": "<p>Welcome to our store. We offer high-quality products for everyday use.</p>",
+      "bodySummary": "Learn more about our store and mission.",
+      "seo": {
+        "title": "About Us",
+        "description": "Learn more about our store and mission."
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "gid://shopify/OnlineStorePage/2",
+      "title": "Shipping Policy",
+      "handle": "shipping",
+      "body": "<p>We ship worldwide. Free shipping on orders over $50.</p>",
+      "bodySummary": "Our shipping policy and rates.",
+      "seo": {
+        "title": "Shipping Policy",
+        "description": "Our shipping policy and rates."
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "menus": {
+    "next-js-frontend-header-menu": [
+      {
+        "title": "All",
+        "url": "/search"
+      },
+      {
+        "title": "Drinkware",
+        "url": "/search/drinkware"
+      },
+      {
+        "title": "Accessories",
+        "url": "/search/accessories"
+      }
+    ],
+    "next-js-frontend-footer-menu": [
+      {
+        "title": "About",
+        "url": "/about"
+      },
+      {
+        "title": "Shipping",
+        "url": "/shipping"
+      }
+    ]
+  },
+  "collectionProducts": {
+    "drinkware": ["acme-cup", "acme-mug"],
+    "accessories": ["acme-drawstring-bag"],
+    "all": ["acme-drawstring-bag", "acme-cup", "acme-mug"],
+    "hidden-homepage-featured-items": ["acme-drawstring-bag", "acme-cup", "acme-mug"],
+    "hidden-homepage-carousel": ["acme-drawstring-bag", "acme-cup", "acme-mug"]
+  }
+}
+
