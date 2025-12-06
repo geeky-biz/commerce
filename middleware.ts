@@ -1,15 +1,26 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { addColdStartHeader } from './lib/cold-start';
+import { detectColdStart } from './lib/cold-start';
 
 /**
  * Middleware to add cold start detection header to all responses
  * This runs on every request (API routes, pages, server components, etc.)
+ * 
+ * Note: On Vercel, headers set via NextResponse.next() should work, but if they don't appear,
+ * API routes need to add headers themselves using addColdStartHeader()
  */
 export function middleware(request: NextRequest) {
-  // Create response and add cold start headers
+  const coldStartInfo = detectColdStart();
+  
+  // Create response and add cold start headers directly
+  // Using direct header setting instead of helper to ensure Vercel compatibility
   const response = NextResponse.next();
-  addColdStartHeader(response);
+  
+  // Set headers directly - this should work on Vercel
+  response.headers.set('x-cold-start', coldStartInfo.isColdStart ? 'true' : 'false');
+  response.headers.set('x-cold-start-runtime-age', coldStartInfo.runtimeAge.toString());
+  response.headers.set('x-cold-start-request-count', coldStartInfo.requestCount.toString());
+  response.headers.set('x-cold-start-runtime-initialized-at', new Date(coldStartInfo.runtimeInitializedAt).toISOString());
   
   return response;
 }
