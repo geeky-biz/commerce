@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic'
-
+export const runtime = 'nodejs';
 import { Carousel } from 'components/carousel';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import Footer from 'components/layout/footer';
